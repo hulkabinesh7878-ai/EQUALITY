@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EQUALITY</title>
+
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial;
+            text-align: center;
+            background-image: url("image/Golden World, United Together.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .box {
+            width: 350px;
+            margin: 100px auto;
+            padding: 25px;
+            background-color: black;
+            border: 2px solid gold;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: gold;
+            font-size: 35px;
+        }
+
+        h2 {
+            color: yellow;
+            font-size: 22px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 1px solid gold;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: gold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: orange;
+        }
+
+        #message {
+            color: yellow;
+        }
+
+        #otpBox {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>EQUALITY</h1>
+
+        <h2>VERIFY YOUR MOBILE NUMBER</h2>
+
+        <p>Enter your mobile number</p>
+
+        <input type="text"
+               id="mobile"
+               placeholder="Enter mobile number"
+               maxlength="10">
+
+        <br>
+
+        <button onclick="sendOTP()">
+            SEND OTP
+        </button>
+
+        <button onclick="cancel()">
+            CANCEL
+        </button>
+
+        <div id="otpBox">
+
+            <p>Enter OTP</p>
+
+            <input type="text"
+                   id="otp"
+                   placeholder="Enter OTP"
+                   maxlength="6">
+
+            <br>
+
+            <button onclick="verifyOTP()">
+                VERIFY
+            </button>
+
+        </div>
+
+        <p id="message"></p>
+
+    </div>
+
+    <script>
+
+        var generatedOTP;
+
+        function sendOTP() {
+
+            var mobile = document.getElementById("mobile").value;
+
+            if (mobile == "") {
+
+                document.getElementById("message").innerHTML =
+                "Please enter mobile number";
+
+            }
+
+            else if (mobile.length != 10 || !/^[0-9]{10}$/.test(mobile)) {
+
+                document.getElementById("message").innerHTML =
+                "Enter a valid 10 digit number";
+
+            }
+
+            else {
+
+                generatedOTP = Math.floor(100000 + Math.random() * 900000);
+
+                document.getElementById("otpBox").style.display = "block";
+
+                document.getElementById("message").innerHTML =
+                "Your Demo OTP is: " + generatedOTP;
+
+            }
+
+        }
+
+        function verifyOTP() {
+
+            var enteredOTP = document.getElementById("otp").value;
+
+            if (enteredOTP == generatedOTP && generatedOTP != undefined) {
+
+                window.location.href = "DIWALI.html";
+
+            }
+
+            else {
+
+                document.getElementById("message").innerHTML =
+                "Wrong OTP! Try again";
+
+            }
+
+        }
+
+        function cancel() {
+
+            document.getElementById("mobile").value = "";
+            document.getElementById("otp").value = "";
+
+            document.getElementById("otpBox").style.display = "none";
+
+            document.getElementById("message").innerHTML = "";
+
+            generatedOTP = undefined;
+
+        }
+
+    </script>
+
+</body>
+</html>

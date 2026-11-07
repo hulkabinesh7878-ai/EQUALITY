@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EQUALITY Registration</title>
+
+    <style>
+        body {
+            background:
+                linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+                url("image/Golden World, United Together.png");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            color: gold;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #FFD700;
+            font-size: 45px;
+            text-shadow: 0 0 15px gold;
+        }
+
+        h2 {
+            color: #FFD700;
+        }
+
+        form {
+            background-color: rgba(0,0,0,0.75);
+            border: 2px solid gold;
+            border-radius: 15px;
+            padding: 30px;
+            width: 80%;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 0 20px #D4AF37;
+        }
+
+        input, select {
+            padding: 12px;
+            width: 85%;
+            border: 2px solid gold;
+            border-radius: 7px;
+            background-color: black;
+            color: gold;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: gold;
+            color: black;
+            padding: 12px 25px;
+            border: 2px solid #FFE58A;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 8px;
+        }
+
+        button:hover {
+            box-shadow: 0 0 15px gold;
+        }
+
+        #message {
+            margin-top: 15px;
+            color: gold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>EQUALITY</h1>
+    <h2>JOIN OUR PEOPLE</h2>
+
+    <form id="registerForm">
+
+        <label for="name">Full Name</label>
+        <br><br>
+
+        <input type="text" id="name"
+            placeholder="Enter your name" required>
+
+        <br><br>
+
+        <label for="age">Age (18+)</label>
+        <br><br>
+
+        <input type="number" id="age"
+            placeholder="Enter your age"
+            min="18" required>
+
+        <br><br>
+
+        <label for="community">WE ARE ALL EQUAL</label>
+        <br><br>
+
+        <select id="community" required>
+            <option value="" selected disabled hidden>
+                Select
+            </option>
+            <option value="All Are Equal">
+                All Are Equal
+            </option>
+        </select>
+
+        <br><br>
+
+        <button type="submit">SUBMIT</button>
+
+        <button type="button" id="cancelBtn">
+            CANCEL
+        </button>
+
+        <p id="message"></p>
+
+    </form>
+
+    <script>
+
+        const form = document.getElementById("registerForm");
+        const message = document.getElementById("message");
+
+        form.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const age = Number(document.getElementById("age").value);
+            const community = document.getElementById("community").value;
+
+            if (age < 18) {
+                message.textContent =
+                    "Registration is available only for adults 18+.";
+                return;
+            }
+
+            if (community !== "All Are Equal") {
+                message.textContent =
+                    "Please select All Are Equal.";
+                return;
+            }
+
+            // Save registered name
+            localStorage.setItem("equalityName", name);
+
+            // Go to mobile OTP page
+            window.location.href = "mobile.html";
+
+        });
+
+        document.getElementById("cancelBtn").addEventListener("click", function() {
+            form.reset();
+            message.textContent = "";
+        });
+
+    </script>
+
+</body>
+</html>
